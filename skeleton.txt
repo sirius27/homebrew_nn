@@ -1,0 +1,91 @@
+'''
+skeleton
+'''
+import numpy as np
+
+data =
+chars =
+data_size, vocab_size =
+
+char_to_ix =
+ix_to_char =
+
+hidden_size =
+seq_length =
+learning_rate =
+
+Wxh =
+Whh =
+Why =
+bh =
+by =
+
+def lossFun(inputs,targets,hprev):
+	# forward propagate
+	xs, hs, ys, ps =
+	hs[-1] =
+	loss =
+	for t in xrange(len(inputs)):
+		xs[t] =
+		xs[t][inputs[t]] =
+		hs[t] =
+		ys[t] =
+		ps[t] =
+		loss +=
+	dWxh, dWhh, dWhy =
+	dbh, dby =
+	# dhnext 记录t时刻h层对t+1时刻h层的影响带来的改变量，在对t+1时刻求微分时求出
+	dhnext =
+	for t in reversed(xrange(len(inputs))):
+		dy =
+		dy[targets[t]] -=
+		dWhy +=
+		dby +=
+		dh =
+		dhraw =
+		dbh +=
+		dWxh +=
+		dWhh +=
+		dhnext =
+	for dparam in [dWxh,dWhh,dWhy,dbh, dby]:
+
+	return loss,dWxh,dWhh,dWhy,dbh,dby,hs[len(inputs) - 1]
+
+def sample(h, seed_ix, n):
+	x =
+	x[seed_ix] =
+	ixes =
+	for t in xrange(n):
+		h =
+		y =
+		p =
+		ix =
+		x =
+		x[ix] =
+		ixes
+	return ixes
+
+n,p = 0,0
+# remember the previous parameters, for use in learning-rate decay
+mWxh,mWhh,mWhy =
+mbh,mby =
+smooth_loss =
+while True:
+	if p+seq_length+1 >= len(data) or n == 0:
+		hprev =
+		p =
+	inputs =
+	targets =
+
+	if n % 100 == 0:
+		sample_ix =
+		txt =
+		print
+	loss, dWxh, dWhh, dWhy, dbh, dby, hprev =
+	smooth_loss =
+	if n%100 == 0:
+
+	for param, dparam mem in zip():
+
+	p +=
+	n +=
